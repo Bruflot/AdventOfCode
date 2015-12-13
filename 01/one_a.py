@@ -1,4 +1,4 @@
-def day_one_a():
+def one_a():
     i = 0
 
     with open('day_one.txt', 'r') as f:
