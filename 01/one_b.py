@@ -1,7 +1,7 @@
 def one_b():
     i = 0
 
-    with open('day_one.txt', 'r') as f:
+    with open('one_raw.txt', 'r') as f:
         for index, char in enumerate(f.read()):
             if char is '(':
                 i += 1
