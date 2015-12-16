@@ -16,5 +16,4 @@ with open('five_raw.txt', 'r') as f:
                     nice += 1
                     break
 
-
 print(nice)
