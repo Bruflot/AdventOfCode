@@ -19,7 +19,7 @@ with open('six_raw.txt', 'r') as f:
                 elif cmd == 'off':
                     matrix[_x][_y] = False
                 else:
-                    matrix[_x][_y] = bool(matrix[_x][_y]) ^ 1
+                    matrix[_x][_y] ^= 1
 
 for column in matrix:
     for row in column:
