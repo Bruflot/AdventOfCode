@@ -12,9 +12,8 @@ operators = {
 with open('seven_raw.txt', 'r') as f:
     for line in f:
         expr, var = line.split('->')
-        if 'lx' in expr:
-            expr = '2797'
         wires[var.strip()] = expr.split()
+        wires['a'] = ['2797']
 
 while 'a' not in result:
     for name, key in wires.items():
