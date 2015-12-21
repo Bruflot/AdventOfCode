@@ -1,5 +1,13 @@
+import operator
+
 wires = dict()
 result = dict()
+operators = {
+    'AND': operator.and_,
+    'OR': operator.or_,
+    'LSHIFT': operator.lshift,
+    'RSHIFT': operator.rshift
+}
 
 with open('seven_raw.txt', 'r') as f:
     for line in f:
@@ -22,49 +30,10 @@ while 'a' not in result:
             # 'ce': ['bk', 'LSHIFT', '1']
             if key[0] in result:
                 if key[2].isdigit():
-                    if key[1] == 'AND':
-                        result[name] = result[key[0]] & int(key[2])
-                    elif key[1] == 'OR':
-                        result[name] = result[key[0]] | int(key[2])
-                    elif key[1] == 'LSHIFT':
-                        result[name] = result[key[0]] << int(key[2])
-                    elif key[1] == 'RSHIFT':
-                        result[name] = result[key[0]] >> int(key[2])
-                    else:
-                        print(key[1])
+                    result[name] = operators[key[1]](result[key[0]], int(key[2]))
                 elif key[2] in result:
-                    if key[1] == 'AND':
-                        result[name] = result[key[0]] & result[key[2]]
-                    elif key[1] == 'OR':
-                        result[name] = result[key[0]] | result[key[2]]
-                    elif key[1] == 'LSHIFT':
-                        result[name] = result[key[0]] << result[key[2]]
-                    elif key[1] == 'RSHIFT':
-                        result[name] = result[key[0]] >> result[key[2]]
-                    else:
-                        print(key[1])
-            elif key[0].isdigit():
-                if key[2].isdigit():
-                    if key[1] == 'AND':
-                        result[name] = int(key[0]) & int(key[2])
-                    elif key[1] == 'OR':
-                        result[name] = int(key[0]) | int(key[2])
-                    elif key[1] == 'LSHIFT':
-                        result[name] = int(key[0]) << int(key[2])
-                    elif key[1] == 'RSHIFT':
-                        result[name] = int(key[0]) >> int(key[2])
-                    else:
-                        print(key[1])
-                elif key[2] in result:
-                    if key[1] == 'AND':
-                        result[name] = int(key[0]) & result[key[2]]
-                    elif key[1] == 'OR':
-                        result[name] = int(key[0]) | result[key[2]]
-                    elif key[1] == 'LSHIFT':
-                        result[name] = int(key[0]) << result[key[2]]
-                    elif key[1] == 'RSHIFT':
-                        result[name] = int(key[0]) >> result[key[2]]
-                    else:
-                        print(key[1])
+                    result[name] = operators[key[1]](result[key[0]], result[key[2]])
+            elif key[0].isdigit() and key[2] in result:
+                result[name] = operators[key[1]](int(key[0]), result[key[2]])
 
 print(result['a'])
