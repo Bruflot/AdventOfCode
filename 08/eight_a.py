@@ -1,5 +1,5 @@
 import re
-regex = ('(\\\\\\\\)', '(\\\\x[0-9a-z]{2})', '(\\\\")')
+regex = (r'(\\\\)', r'(\\x[0-9a-z]{2})', r'(\\")')
 char_len = 0
 
 with open('eight_raw.txt', 'r') as f:
