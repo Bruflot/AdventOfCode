@@ -1,5 +1,6 @@
 key = '1113122113'
 
+
 def output(_in):
     n = 1
     new_str = ''
@@ -14,7 +15,7 @@ def output(_in):
 
     return new_str
 
-for i in range(0, 50):
+for i in range(0, 40):
     key = output(key)
 
 print(len(key))
