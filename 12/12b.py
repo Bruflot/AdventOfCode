@@ -4,17 +4,18 @@ with open('input.txt', 'r') as f:
     total = 0
     buf = f.read()
     braces = []
+    result = []
     i = 0
 
     for idx, char in enumerate(buf):
         if char == '{':
             braces.append(idx)
-            i += 1
         elif char == '}':
-            braces[i] = [braces[i], idx]
-            i -= 1
+            result.append([braces[-1], idx])
 
-    for i in braces:
-        if 'red' in buf[i[0]:i[1]]:
-            print('yah')
-        # if it's not, add the numbers to total
+    for i in result:
+        temp = buf[i[0]:i[1]]
+        if 'red' not in temp:
+            total += sum(int(x) for x in re.findall(r'\-?[0-9]+', temp))
+
+print(total)
